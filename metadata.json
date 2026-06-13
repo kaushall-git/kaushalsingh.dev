@@ -1,0 +1,6 @@
+{
+  "name": "Kaushal Portfolio",
+  "description": "Premium interactive portfolio for Kaushal Singh Chamyal - Data Analyst, Zoho Consultant, and SaaS Operations Associate featuring live BI showcases, GitHub metrics, and a server-side Gemini AI companion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
