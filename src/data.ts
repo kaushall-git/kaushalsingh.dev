@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
       "Drafted comprehensive specifications resulting in successful Research Publication Acceptance",
       "Scaled framework to handle concurrent real-time coordination updates securely"
     ],
-    githubUrl: "https://github.com/kaushall-git/bus-mitra",
+    githubUrl: "https://github.com/kaushall-git/BUSMITRA",
     liveUrl: "#",
     impact: "100+ Potential Daily Commuters Impacted with 90%+ Tracking Accuracy"
   },
@@ -62,8 +62,8 @@ export const PROJECTS: Project[] = [
       "Highlights deep expertise in modern generative workflows and responsive designs",
       "Ensured instant loading matching Apple-like visual minimalism guidelines"
     ],
-    githubUrl: "https://github.com/kaushall-git/aura-music",
-    liveUrl: "https://kaushall-git.github.io/aura-music",
+    githubUrl: "https://github.com/kaushall-git/AuraMusic",
+    liveUrl: "https://ais-pre-volui4xj5dqpwrs37vktiv-983567081324.asia-southeast1.run.app",
     impact: "Showcases innovative client-side AI product builds combined with premium UI layouts"
   },
   {
@@ -84,7 +84,7 @@ export const PROJECTS: Project[] = [
       "Calculated customer lifetime value trajectories and optimized promotional margins",
       "Delivered visual dashboards identifying 15% revenue leakage opportunities"
     ],
-    githubUrl: "https://github.com/kaushall-git/ecommerce-analysis",
+    githubUrl: "https://github.com/kaushall-git/Ecommerce_Analysis",
     liveUrl: "#",
     impact: "Generated 15% Business Insight Improvements with polished forecasting reports"
   },
@@ -105,7 +105,7 @@ export const PROJECTS: Project[] = [
       "Engineered clean facial landmark vector calculations using lightweight dlib models",
       "Prototyped full hardware integration proposal for freight transport partners"
     ],
-    githubUrl: "https://github.com/kaushall-git/drowsiness-detection",
+    githubUrl: "https://github.com/kaushall-git/Driver-Drowsy-Detection",
     liveUrl: "#",
     impact: "Accident Prevention model maintaining high response accuracy inside test streams"
   },
