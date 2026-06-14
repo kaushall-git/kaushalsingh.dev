@@ -162,7 +162,25 @@ GUIDELINES FOR YOUR RESPONSES:
     }
   } catch (error: any) {
     console.error("Error calling Gemini API:", error);
-    res.status(500).json({ error: error.message || "Internal Server Error" });
+    
+    // Check for transient 503 / Service Unavailable errors from Gemini API
+    const isServiceUnavailable = 
+      error.status === 503 ||
+      error.statusCode === 503 ||
+      (error.message && (
+        error.message.includes("503") || 
+        error.message.includes("UNAVAILABLE") || 
+        error.message.includes("unavailable") ||
+        error.message.includes("busy")
+      ));
+      
+    if (isServiceUnavailable) {
+      res.status(503).json({ 
+        error: "The Gemini AI companion service is currently experiencing temporary high traffic or maintenance (HTTP 503). Please wait a moment and try sending your message again." 
+      });
+    } else {
+      res.status(500).json({ error: error.message || "Internal Server Error" });
+    }
   }
 });
 
