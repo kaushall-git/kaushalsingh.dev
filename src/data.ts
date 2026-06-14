@@ -14,8 +14,8 @@ export const KAUSHAL_BIO = {
   tagline: "Transforming data into actionable business insights through analytics, automation, and intelligent systems.",
   email: "itskaushal11@gmail.com",
   github: "https://github.com/kaushall-git",
-  linkedin: "https://linkedin.com/in/itskaushal11",
-  whatsappCode: "918073868661", // Placeholder or standard whatsapp trigger
+  linkedin: "https://www.linkedin.com/in/realkaushal07",
+  whatsappCode: "917982125256", // Placeholder or standard whatsapp trigger
   aboutMe: `I am a Computer Science graduate passionate about Data Analytics, Business Intelligence, SaaS Automation, CRM Systems, and Product Development. I specialize in transforming complex datasets into meaningful insights while building scalable workflows and automation systems that improve operational efficiency.`
 };
 
