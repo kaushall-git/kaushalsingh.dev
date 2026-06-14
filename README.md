@@ -1,4 +1,6 @@
-https://kaushall-git.github.io/kaushalsingh.dev/
+<a href="https://kaushall-git.github.io/kaushalsingh.dev/">
+  Watch Here
+</a>
 
 # Run and deploy
 This contains everything you need to run your app locally.
