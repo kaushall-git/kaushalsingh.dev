@@ -123,6 +123,13 @@ body {
 /* Light mode specific element modifications */
 .light {
   color-scheme: light;
+  --theme-bg-main: #f8fafc;
+  --theme-bg-card: #ffffff;
+  --theme-border-main: #cbd5e1;
+  --theme-text-main: #334155;
+  --theme-text-muted: #64748b;
+  --theme-text-heading: #111111;
+  --theme-bg-subtle: #f1f5f9;
 }
 
 .light body {
@@ -130,10 +137,25 @@ body {
   color: var(--theme-text-main);
 }
 
-/* Background replacements */
+/* Section headers: Black */
+.light h1,
+.light h2 {
+  color: #000000 !important;
+}
+
+/* Card titles and important headings */
+.light h3,
+.light h4,
+.light h5,
+.light h6 {
+  color: var(--theme-text-heading) !important;
+}
+
+/* Background replacements for specific hex-coded sections dynamically */
 .light .bg-\[\#0b1120\],
 .light .bg-\[\#0b1120\]\/80,
-.light .bg-theme-main {
+.light .bg-theme-main,
+.light [class*="bg-[#0b1120]"] {
   background-color: var(--theme-bg-main) !important;
 }
 
@@ -146,9 +168,16 @@ body {
 .light .bg-\[\#0e1726\]\/95,
 .light .bg-\[\#0f172a\],
 .light .bg-\[\#0f172a\]\/70,
+.light [class*="bg-[#0e1726]"],
+.light [class*="bg-[#0f172a]"],
 .light .bg-slate-900,
 .light .bg-slate-900\/60,
 .light .bg-slate-850,
+.light [class*="bg-slate-900"],
+.light [class*="bg-slate-850"],
+.light [class*="bg-slate-800"],
+.light [class*="bg-zinc-800"],
+.light [class*="bg-zinc-900"],
 .light .bg-theme-card {
   background-color: var(--theme-bg-card) !important;
 }
@@ -156,8 +185,18 @@ body {
 .light .bg-[#0f172a],
 .light .bg-slate-950\/40,
 .light .bg-slate-950\/20,
+.light [class*="bg-slate-950"],
+.light [class*="bg-zinc-950"],
+.light .bg-[#080d19],
+.light [class*="bg-[#080d19]"],
 .light .bg-theme-subtle {
   background-color: var(--theme-bg-subtle) !important;
+}
+
+/* Nav specific layouts (keep readable) */
+.light nav, .light #header-navigation {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+  border-bottom: 1px solid var(--theme-border-main) !important;
 }
 
 /* Border replacements */
@@ -165,33 +204,76 @@ body {
 .light .border-slate-850,
 .light .border-slate-900,
 .light .border-slate-950,
+.light [class*="border-slate-"],
+.light [class*="border-zinc-"],
 .light .border-theme-main {
   border-color: var(--theme-border-main) !important;
 }
 
-/* Foreground texts */
+/* Robust Text color overrides mapping to the primary/heading colors in light mode */
 .light .text-white,
 .light .text-slate-100,
 .light .text-slate-50,
 .light .text-slate-200,
-.light .text-theme-heading {
+.light .text-theme-heading,
+.light [class*="text-white"],
+.light [class*="text-slate-100"],
+.light [class*="text-slate-50"],
+.light [class*="text-slate-200"],
+.light [class*="text-zinc-50"],
+.light [class*="text-zinc-100"],
+.light [class*="text-zinc-200"] {
   color: var(--theme-text-heading) !important;
 }
 
+/* Robust text mapping to standard/muted text values */
 .light .text-slate-300,
 .light .text-slate-350,
 .light .text-slate-400,
 .light .text-slate-450,
-.light .text-theme-main {
+.light .text-theme-main,
+.light [class*="text-slate-300"],
+.light [class*="text-slate-350"],
+.light [class*="text-slate-400"],
+.light [class*="text-slate-450"],
+.light [class*="text-zinc-300"],
+.light [class*="text-zinc-400"],
+.light [class*="text-gray-400"] {
   color: var(--theme-text-main) !important;
 }
 
 .light .text-slate-500,
+.light .text-slate-550,
+.light [class*="text-slate-500"],
+.light [class*="text-slate-550"],
+.light [class*="text-slate-650"],
+.light [class*="text-zinc-500"],
+.light [class*="text-gray-500"],
 .light .text-theme-mutedBy {
   color: var(--theme-text-muted) !important;
 }
 
-/* Specific elements & active states */
+/* Active buttons and tabs logic overrides so they stand out */
+.light .bg-\[\#0e1726\],
+.light button[class*="bg-[#0e1726]"],
+.light button[class*="bg-slate-900"] {
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-text-heading) !important;
+  border-color: var(--theme-border-main) !important;
+}
+
+.light button[class*="bg-[#0e1726]"]:hover {
+  background-color: var(--theme-border-main) !important;
+}
+
+/* Hover/active lists overrides */
+.light .hover\:bg-slate-800\/20:hover,
+.light [class*="hover:bg-[#0f172a]"]:hover,
+.light [class*="hover:bg-[#0e1726]"]:hover {
+  background-color: var(--theme-bg-subtle) !important;
+}
+
+/* Specific elements & custom active state adjustments */
 .light .bg-slate-800\/80 {
   background-color: var(--theme-bg-subtle) !important;
   color: var(--theme-text-main) !important;
@@ -203,22 +285,49 @@ body {
   color: var(--theme-text-heading) !important;
 }
 
-/* Active tab styles */
-.light .bg-\[\#0e1726\] {
-  background-color: var(--theme-bg-subtle) !important;
+/* Forms & Inputs styling */
+.light input,
+.light textarea,
+.light select {
+  background-color: var(--theme-bg-card) !important;
   color: var(--theme-text-heading) !important;
-  border: 1px solid var(--theme-border-main);
+  border-color: var(--theme-border-main) !important;
 }
 
-/* Gradient replacements */
+.light ::placeholder,
+.light input::placeholder,
+.light textarea::placeholder,
+.light [class*="placeholder-"] {
+  color: var(--theme-text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* Icon / SVG adaptations: Force non-accent icons to Dark Gray */
+.light svg:not(.text-sky-400):not(.text-violet-400):not(.text-emerald-400):not(.text-blue-400):not(.text-amber-400):not(.text-pink-500):not(.text-amber-500):not(.text-emerald-500) {
+  color: var(--theme-text-main) !important;
+  stroke: var(--theme-text-main) !important;
+}
+
+/* Gradients updates for light modes */
 .light .bg-gradient-to-tr.from-slate-900 {
   background-image: linear-gradient(135deg, var(--theme-bg-subtle), var(--theme-border-main)) !important;
 }
 .light .bg-gradient-to-b.from-\[\#0f172a\]\/70 {
   background-image: linear-gradient(180deg, var(--theme-bg-subtle), var(--theme-bg-card)) !important;
 }
+.light [class*="bg-gradient-to-b from-[#111827]"] {
+  background-image: linear-gradient(180deg, var(--theme-bg-card), var(--theme-bg-subtle)) !important;
+}
+.light [class*="bg-gradient-to-tr from-slate-900"] {
+  background-image: linear-gradient(135deg, var(--theme-bg-subtle), var(--theme-border-main)) !important;
+}
 
-/* Ambient glow overrides to maintain contrast readability */
+/* Play/Pause specific control override */
+.light [class*="text-slate-950"] {
+  color: #111111 !important;
+}
+
+/* Ambient glow overrides for readability rules */
 .light .absolute.rounded-full.bg-gradient-to-tr,
 .light .absolute.rounded-full.bg-gradient-to-br,
 .light .absolute.rounded-full.bg-gradient-to-b {

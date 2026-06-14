@@ -295,10 +295,10 @@ WORK HISTORY
           {/* Logo / Personal Brand */}
           <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => scrollToSection("hero")}>
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 via-sky-400 to-violet-600 flex items-center justify-center font-extrabold text-slate-950 text-lg shadow-lg shadow-blue-500/10 group-hover:scale-105 transition-transform duration-300">
-              KSC
+              K
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-[15px] tracking-tight text-white leading-none group-hover:text-blue-400 transition-colors">Kaushal Singh Chamyal</span>
+              <span className="font-extrabold text-[15px] tracking-tight text-white leading-none group-hover:text-blue-400 transition-colors">Kaushal</span>
               <span className="text-[10px] text-slate-400 font-mono tracking-widest mt-1 uppercase font-semibold">Data Analyst & Operations</span>
             </div>
           </div>
@@ -377,39 +377,71 @@ WORK HISTORY
       {/* MOBILE NAV OVERLAY FRAME */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, scaleY: 0.95 }}
-            animate={{ opacity: 1, scaleY: 1 }}
-            exit={{ opacity: 0, scaleY: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden border-b border-slate-900 bg-[#0e1726]/95 backdrop-blur-lg overflow-hidden absolute top-20 left-0 w-full z-40"
-          >
-            <div className="px-6 py-6 flex flex-col space-y-4">
-              <button onClick={() => scrollToSection("about")} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm">About Summary</button>
-              <button onClick={() => scrollToSection("impact")} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm">Business Impact</button>
-              <button onClick={() => scrollToSection("skills")} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm">Skills Inventory</button>
-              <button onClick={() => scrollToSection("projects")} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm">Case Studies</button>
-              <button onClick={() => scrollToSection("dashboards")} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm">BI Dashboards</button>
-              <button onClick={() => scrollToSection("certifications")} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm">Certificates</button>
-              <button onClick={() => scrollToSection("journey")} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm">Career Timeline</button>
-              <button onClick={() => scrollToSection("assistant-section")} className="text-left py-2 text-blue-400 hover:text-white font-medium text-sm flex items-center gap-2">
-                <Bot className="w-4 h-4" />
-                AI Assistant Agent
-              </button>
-              
-              <div className="h-[1px] bg-slate-900 my-2" />
-              
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono text-slate-500">IST Time: {currentTime}</span>
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="lg:hidden fixed inset-0 bg-[#030712]/60 backdrop-blur-sm z-40 cursor-pointer"
+            />
+
+            {/* Slider Panel Drawer */}
+            <motion.div
+              initial={{ x: "100%", opacity: 0.95 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0.95 }}
+              transition={{ type: "spring", damping: 24, stiffness: 180 }}
+              className="lg:hidden fixed top-0 right-0 h-full w-[300px] bg-[#0e1726]/98 backdrop-blur-xl border-l border-slate-900 z-50 shadow-2xl flex flex-col justify-between overflow-hidden"
+            >
+              <div className="px-6 py-6 overflow-y-auto flex-1 space-y-6">
+                {/* Drawer Header Brand Node */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-900">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-500 to-sky-400 flex items-center justify-center font-extrabold text-slate-950 text-sm">
+                      K
+                    </div>
+                    <span className="font-extrabold text-sm text-white">Kaushal</span>
+                  </div>
+                  <button 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-1.5 rounded-lg bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800 transition-colors cursor-pointer"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Navigation Link Lists */}
+                <div className="flex flex-col space-y-4 pt-2">
+                  <button onClick={() => { setMobileMenuOpen(false); scrollToSection("about"); }} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm cursor-pointer transition-colors">About Summary</button>
+                  <button onClick={() => { setMobileMenuOpen(false); scrollToSection("impact"); }} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm cursor-pointer transition-colors">Business Impact</button>
+                  <button onClick={() => { setMobileMenuOpen(false); scrollToSection("skills"); }} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm cursor-pointer transition-colors">Skills Inventory</button>
+                  <button onClick={() => { setMobileMenuOpen(false); scrollToSection("projects"); }} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm cursor-pointer transition-colors">Case Studies</button>
+                  <button onClick={() => { setMobileMenuOpen(false); scrollToSection("dashboards"); }} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm cursor-pointer transition-colors">BI Dashboards</button>
+                  <button onClick={() => { setMobileMenuOpen(false); scrollToSection("certifications"); }} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm cursor-pointer transition-colors">Certificates</button>
+                  <button onClick={() => { setMobileMenuOpen(false); scrollToSection("journey"); }} className="text-left py-1 text-slate-350 hover:text-white font-medium text-sm cursor-pointer transition-colors">Career Timeline</button>
+                  <button onClick={() => { setMobileMenuOpen(false); scrollToSection("assistant-section"); }} className="text-left py-2 text-blue-400 hover:text-white font-medium text-sm flex items-center gap-2 cursor-pointer transition-colors">
+                    <Bot className="w-4 h-4" />
+                    AI Assistant Agent
+                  </button>
+                </div>
+              </div>
+
+              {/* Drawer Sticky Footer controls */}
+              <div className="p-6 border-t border-slate-900 bg-slate-900/20 space-y-4">
+                <div className="flex items-center justify-between text-[11px] font-mono text-slate-500">
+                  <span>IST: {currentTime}</span>
+                </div>
                 <button
-                  onClick={() => scrollToSection("contact")}
-                  className="text-xs px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-sky-400 hover:opacity-90 text-slate-900 font-bold"
+                  onClick={() => { setMobileMenuOpen(false); scrollToSection("contact"); }}
+                  className="w-full text-center py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-sky-400 hover:opacity-90 text-slate-950 font-bold text-xs transition-opacity cursor-pointer"
                 >
                   Schedule Call
                 </button>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 
@@ -496,7 +528,7 @@ WORK HISTORY
                 <div className="flex items-center justify-between border-b border-slate-900 pb-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500/20 via-sky-500/10 to-violet-500/30 flex items-center justify-center border border-blue-400/20 text-blue-400 font-bold font-display text-base">
-                      KSC
+                      K
                     </div>
                     <div>
                       <h4 className="font-extrabold text-[15px] leading-tight text-white">Kaushal Chamyal</h4>
