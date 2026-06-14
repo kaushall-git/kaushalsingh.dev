@@ -1606,7 +1606,7 @@ WORK HISTORY
                     </div>
                     <div>
                       <span className="block text-slate-500 text-[9px] font-mono uppercase tracking-wider font-bold">WhatsApp Direct</span>
-                      <span className="text-slate-200 text-xs font-mono group-hover:text-emerald-400 transition-colors">+91 80738 68661</span>
+                      <span className="text-slate-200 text-xs font-mono group-hover:text-emerald-400 transition-colors">+91 79821 25256</span>
                     </div>
                     <ExternalLink className="w-3.5 h-3.5 ms-auto text-slate-600 group-hover:text-emerald-400 transition-colors" />
                   </a>
@@ -1638,7 +1638,7 @@ WORK HISTORY
                     </div>
                     <div>
                       <span className="block text-slate-500 text-[9px] font-mono uppercase tracking-wider font-bold">Corporate LinkedIn</span>
-                      <span className="text-slate-200 text-xs font-mono group-hover:text-sky-450 transition-colors">/in/itskaushal11</span>
+                      <span className="text-slate-200 text-xs font-mono group-hover:text-sky-450 transition-colors">/in/realkaushal07</span>
                     </div>
                     <ExternalLink className="w-3.5 h-3.5 ms-auto text-slate-600 group-hover:text-sky-450 transition-colors" />
                   </a>
