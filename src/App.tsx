@@ -1771,7 +1771,7 @@ WORK HISTORY
         </div>
 
         <div className="border-t border-slate-900/60 pt-6 text-[10px] text-slate-650 font-mono">
-          <p>© 2026 Kaushal Singh Chamyal. All Rights Reserved. Built with React, Tailwind and Gemini.</p>
+          <p>© 2026 Kaushal Singh Chamyal. All Rights Reserved.</p>
         </div>
       </footer>
 
