@@ -161,7 +161,7 @@ export default function App() {
     const resumeText = `KAUSHAL SINGH CHAMYAL
 Data Analyst | Zoho Consultant | SaaS Operations Associate
 Email: itskaushal11@gmail.com
-LinkedIn: linkedin.com/in/itskaushal11
+LinkedIn: linkedin.com/in/realkaushal07
 GitHub: github.com/kaushall-git
 Location: India
 
@@ -2696,7 +2696,7 @@ WORK HISTORY
                       const mdText = `
 # KAUSHAL SINGH CHAMYAL
 Data Analyst | Zoho Consultant | SaaS Operations Associate
-Email: itskaushal11@gmail.com | LinkedIn: linkedin.com/in/itskaushal11 | GitHub: github.com/kaushall-git
+Email: itskaushal11@gmail.com | LinkedIn: linkedin.com/in/realkaushal07 | GitHub: github.com/kaushall-git
 Location: India
 
 ## PROFESSIONAL SUMMARY
@@ -2761,7 +2761,7 @@ CS Graduate specializing in Data Analytics, Business Intelligence, SaaS CRM oper
                     <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 pt-1 text-[10px] md:text-xs font-mono text-slate-600">
                       <span>itskaushal11@gmail.com</span>
                       <span>&bull;</span>
-                      <a href="https://linkedin.com/in/itskaushal11" target="_blank" rel="noreferrer" className="underline">linkedin.com/in/itskaushal11</a>
+                      <a href="https://linkedin.com/in/realkaushal07" target="_blank" rel="noreferrer" className="underline">linkedin.com/in/realkaushal07</a>
                       <span>&bull;</span>
                       <a href="https://github.com/kaushall-git" target="_blank" rel="noreferrer" className="underline">github.com/kaushall-git</a>
                       <span>&bull;</span>
