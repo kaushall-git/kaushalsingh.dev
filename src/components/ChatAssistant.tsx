@@ -32,7 +32,15 @@ export default function ChatAssistant() {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    // Avoid appending duplicate user messages in historical list when retrying
+    setMessages((prev) => {
+      const last = prev[prev.length - 1];
+      if (last && last.role === "user" && last.text === textToSend) {
+        return prev;
+      }
+      return [...prev, userMessage];
+    });
+    
     setInput("");
     setIsLoading(true);
 
@@ -175,9 +183,26 @@ export default function ChatAssistant() {
 
         {/* Error */}
         {errorMsg && (
-          <div className="flex items-center gap-2 p-3 bg-red-950/40 border border-red-500/20 rounded-xl text-red-200 text-xs">
-            <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
-            <span>{errorMsg}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 bg-red-950/45 border border-red-500/25 rounded-xl text-red-200 text-xs shadow-lg">
+            <div className="flex items-start gap-2">
+              <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+              <span>{errorMsg}</span>
+            </div>
+            {messages.some((m) => m.role === "user") && (
+              <button
+                type="button"
+                onClick={() => {
+                  const lastUser = [...messages].reverse().find((m) => m.role === "user");
+                  if (lastUser) {
+                    handleSendMessage(lastUser.text);
+                  }
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-300 hover:text-white border border-red-500/35 transition-all font-sans font-bold cursor-pointer shrink-0 self-end sm:self-auto text-[10px] uppercase tracking-wide"
+              >
+                <RefreshCw className="w-3 h-3 text-red-400" />
+                <span>Retry Message</span>
+              </button>
+            )}
           </div>
         )}
 
