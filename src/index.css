@@ -7,6 +7,43 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
+/* Modern high-performance CSS @property registrations for perfect, premium cross-fading of custom colors/gradients */
+@property --theme-bg-main {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0b1120;
+}
+@property --theme-bg-card {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(14, 23, 38, 0.45);
+}
+@property --theme-border-main {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #10192d;
+}
+@property --theme-text-main {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #cbd5e1;
+}
+@property --theme-text-muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #64748b;
+}
+@property --theme-text-heading {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f8fafc;
+}
+@property --theme-bg-subtle {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0f172a;
+}
+
 :root {
   --theme-bg-main: #0b1120;
   --theme-bg-card: rgba(14, 23, 38, 0.45);
@@ -29,11 +66,11 @@
 
 /* Premium smooth transitions between light and dark modes */
 *, *::before, *::after {
-  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-              color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-              border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.65s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.65s cubic-bezier(0.4, 0, 0.2, 1), 
+              border-color 0.65s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.65s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Ensure Framer Motion inline styles and transition animations are not delayed or broken by CSS transitions */
@@ -349,4 +386,45 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--theme-text-muted);
 }
+
+/* Highly Polished Light Mode Footer Design Override */
+.light footer {
+  background-color: #ffffff !important;
+  background-image: radial-gradient(at top, rgba(203, 213, 225, 0.2) 0px, transparent 80%) !important;
+  border-top: 1px solid #cbd5e1 !important;
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+.light footer h4 {
+  color: #111111 !important;
+  font-weight: 800 !important;
+}
+
+.light footer p, 
+.light footer div, 
+.light footer .text-slate-500, 
+.light footer .text-slate-600 {
+  color: #475569 !important;
+}
+
+.light footer a {
+  color: #64748b !important;
+  font-weight: 500 !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.light footer a:hover {
+  color: #2563eb !important;
+}
+
+.light footer .border-t {
+  border-color: #e2e8f0 !important;
+}
+
+.light footer .text-slate-650 {
+  color: #64748b !important;
+  font-weight: 500 !important;
+}
+
 
