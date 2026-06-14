@@ -212,37 +212,55 @@ export const TIMELINE: Experience[] = [
 export const CERTIFICATIONS: Certificate[] = [
   {
     title: "Data Analysis with Python",
-    issuer: "FreeCodeCamp / IBM",
+    issuer: "freeCodeCamp",
+    description: "Comprehensive data analysis with Python, Pandas, NumPy, data cleaning, and data storytelling.",
+    year: "2024",
+    image: "/assets/certificates/data-analysis-python.jpg",
     credentialUrl: "https://freecodecamp.org",
     color: "from-blue-600 to-indigo-600"
   },
   {
     title: "Machine Learning with Python",
-    issuer: "Cognitive Class / Standard Partners",
+    issuer: "Cognitive Class / IBM",
+    description: "Exploration of machine learning algorithms, regression models, classification systems, and regression vectors with Python.",
+    year: "2024",
+    image: "/assets/certificates/machine-learning-ibm.jpg",
     credentialUrl: "#",
     color: "from-purple-600 to-fuchsia-600"
   },
   {
-    title: "Data Analytics & Visualization Job Simulation",
+    title: "Data Analytics and Visualization",
     issuer: "Accenture / Forage",
+    description: "Practical simulation focusing on client requirements mapping, data cleaning, modeling, and presentation storytelling.",
+    year: "2024",
+    image: "/assets/certificates/data-analytics-visualization.jpg",
     credentialUrl: "#",
     color: "from-emerald-600 to-teal-600"
   },
   {
-    title: "Power BI Virtual Case Experience",
+    title: "Power BI Job Simulation",
     issuer: "PwC Switzerland / Forage",
+    description: "Dynamic dashboard development, DAX metrics formulation, user-centric KPI mapping, and corporate reporting.",
+    year: "2024",
+    image: "/assets/certificates/powerbi-pwc.jpg",
     credentialUrl: "#",
     color: "from-amber-600 to-orange-600"
   },
   {
-    title: "Data Analytics Professional",
+    title: "Deloitte Data Analytics",
     issuer: "Deloitte / Forage",
+    description: "Exploratory analysis of business pipelines, demographic categorization, financial diagnostics, and stakeholder presentation logs.",
+    year: "2025",
+    image: "/assets/certificates/deloitte-analytics.jpg",
     credentialUrl: "#",
     color: "from-pink-600 to-rose-600"
   },
   {
-    title: "Software Engineering Virtual Simulation",
+    title: "JPMorgan Software Engineering",
     issuer: "JPMorgan Chase / Forage",
+    description: "Engineering-centered case study involving financial interfaces, dataset streams processing, perspective charts, and systems automation.",
+    year: "2024",
+    image: "/assets/certificates/jpmorgan-software.jpg",
     credentialUrl: "#",
     color: "from-sky-600 to-cyan-600"
   }

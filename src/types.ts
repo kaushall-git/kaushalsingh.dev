@@ -39,6 +39,9 @@ export interface Certificate {
   issuer: string;
   credentialUrl?: string;
   color: string;
+  image?: string;
+  description?: string;
+  year?: string;
 }
 
 export interface Testimonial {

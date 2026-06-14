@@ -30,6 +30,9 @@ import {
   TrendingUp,
   BarChart3,
   Download,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
   Calendar,
   Laptop,
   MessageSquare,
@@ -94,6 +97,24 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [interactionSparkle, setInteractionSparkle] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const [imageError, setImageError] = useState(false);
+  const [zoomScale, setZoomScale] = useState(1);
+
+  useEffect(() => {
+    setImageError(false);
+    setZoomScale(1);
+  }, [selectedCertificate]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedCertificate(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
   
   // Custom interactive overlays and project detail tabs
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -1383,137 +1404,77 @@ WORK HISTORY
           </div>
         </section>
 
-        {/* CERTIFICATIONS SECTION - Interactive gallery with inline expandable previews */}
+        {/* CERTIFICATIONS SECTION - Premium interactive gallery with full size lightboxes */}
         <section id="certifications" className="space-y-12 scroll-mt-24">
           <div className="space-y-2 border-b border-slate-900 pb-6">
             <span className="text-xs font-mono text-violet-400 uppercase tracking-widest font-bold">Accreditation</span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-white font-display">Specialized Certifications</h2>
             <p className="text-slate-400 text-sm md:text-base max-w-xl">
-              Verification files and simulations representing credentials from Deloitte, PwC, Accenture, IBM, and JPMorgan Chase. Click any credential to expand the secure validation summary in-place.
+              Official credentials representing professional simulations and certifications from Deloitte, PwC, Accenture, IBM, and freeCodeCamp. Click the visual Eye button to view certificate credentials.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(() => {
-              const getCertVerificationSummary = (title: string, issuer: string) => {
-                const normTitle = title.toLowerCase();
-                const normIssuer = issuer.toLowerCase();
-                
-                if (normIssuer.includes("deloitte")) {
-                  return "Independently verified practical competency log spanning exploratory data analyses, commercial trend tracking, dashboard logic, and strategic summaries.";
-                }
-                if (normIssuer.includes("pwc")) {
-                  return "Independently verified competency in Power BI dashboard design, complex DAX measures calculation, and corporate visualization systems.";
-                }
-                if (normIssuer.includes("ibm") || normTitle.includes("data analysis with python")) {
-                  return "Independently verified competency in Python-centered analytical workbooks, data cleaning with Pandas, logic scripting, and Matplotlib visualizations.";
-                }
-                if (normTitle.includes("machine learning")) {
-                  return "Verified algorithmic skill in regression modeling, predictive matrices, classification pipelines, and machine learning structures.";
-                }
-                if (normIssuer.includes("accenture")) {
-                  return "Verified practical logic in client requirements mapping, data curation, storytelling, and strategic executive KPI presentations.";
-                }
-                if (normIssuer.includes("jpmorgan") || normIssuer.includes("j.p. morgan")) {
-                  return "Verified software engineering diagnostics, financial visualization queries, system dependencies, and code pipeline maintenance.";
-                }
-                return "Verified analytical skill log validating structural workflow mappings, database transformations, and operational dashboard reporting.";
-              };
+            {CERTIFICATIONS.map((cert, index) => (
+              <motion.div
+                key={index}
+                layout="position"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
+                className="group p-6 rounded-2xl bg-gradient-to-br from-[#0e1726]/30 to-[#0e1726]/10 backdrop-blur-lg border border-slate-900/60 hover:border-blue-500/40 hover:bg-[#0f172a]/20 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 relative flex flex-col justify-between h-full"
+              >
+                <div className="space-y-4">
+                  {/* Top Header Row of Card */}
+                  <div className="flex items-center justify-between">
+                    <div className="w-9 h-9 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 border border-violet-500/20">
+                      <Award className="w-5 h-5 text-violet-400" />
+                    </div>
+                    {cert.year && (
+                      <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] bg-slate-900/60 border border-slate-800 text-slate-400 font-bold">
+                        {cert.year}
+                      </span>
+                    )}
+                  </div>
 
-              return CERTIFICATIONS.map((cert, index) => {
-                const isExpanded = expandedCertIndex === index;
-                return (
-                  <motion.div
-                    key={index}
-                    layout="position"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-                    onClick={() => setExpandedCertIndex(isExpanded ? null : index)}
-                    className="group p-6 rounded-2xl bg-[#0e1726]/30 border border-slate-900 hover:border-blue-500/40 hover:bg-[#0f172a]/40 transition-[border-color,background-color] duration-300 cursor-pointer relative flex flex-col justify-between"
+                  {/* Header block with Title & Issuer */}
+                  <div className="space-y-1">
+                    <h3 className="font-extrabold text-base text-white leading-snug group-hover:text-blue-400 transition-colors duration-200">
+                      {cert.title}
+                    </h3>
+                    <p className="text-xs text-blue-400 font-mono font-medium">
+                      {cert.issuer}
+                    </p>
+                  </div>
+
+                  {/* Descriptive short summary */}
+                  {cert.description && (
+                    <p className="text-xs text-slate-400 leading-relaxed font-sans line-clamp-3">
+                      {cert.description}
+                    </p>
+                  )}
+                </div>
+
+                {/* Action Block - Always Visible Eye Button */}
+                <div className="pt-5 border-t border-slate-900/60 mt-5 flex items-center justify-between">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedCertificate(cert);
+                    }}
+                    className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-slate-950 font-sans font-extrabold text-xs transition-colors cursor-pointer shadow-lg shadow-blue-500/10"
                   >
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-400 border border-violet-500/20">
-                          <Award className="w-5 h-5 text-violet-400" />
-                        </div>
-                        <span className="text-[10px] font-mono text-slate-550 group-hover:text-blue-400 transition-colors uppercase font-bold">
-                          {isExpanded ? "Report Open" : "Verify Spec"}
-                        </span>
-                      </div>
+                    <Eye className="w-3.5 h-3.5 text-slate-950" />
+                    <span>View Certificate</span>
+                  </button>
 
-                      <div className="space-y-1">
-                        <h3 className="font-extrabold text-sm text-white leading-snug group-hover:text-blue-400 transition-colors duration-200">
-                          {cert.title}
-                        </h3>
-                        <p className="text-xs text-slate-500 font-mono">
-                          {cert.issuer}
-                        </p>
-                      </div>
-
-                      {/* Expandable in-place container */}
-                      <AnimatePresence>
-                        {isExpanded && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                            className="overflow-hidden space-y-3 pt-4 border-t border-slate-900/60"
-                          >
-                            <div className="p-3.5 rounded-xl bg-[#0b1120] border border-slate-900 space-y-2.5">
-                              <div className="flex items-center justify-between">
-                                <span className="text-[9px] font-mono font-semibold text-slate-500 uppercase tracking-wide">Validation Report:</span>
-                                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-500/10 text-[9px] text-emerald-400 font-mono font-bold border border-emerald-500/15">
-                                  <Check className="w-2.5 h-2.5" /> SECURE MATCH
-                                </span>
-                              </div>
-                              <p className="text-[11px] text-slate-350 leading-relaxed font-sans font-medium">
-                                {getCertVerificationSummary(cert.title, cert.issuer)}
-                              </p>
-                              <div className="grid grid-cols-2 gap-2 pt-1.5 border-t border-slate-905 bg-slate-950/20">
-                                <div className="space-y-0.5">
-                                  <p className="text-[8px] font-mono text-slate-500 uppercase">Credential ID</p>
-                                  <p className="text-[10px] font-mono text-blue-400 font-bold">KC-CERT-{(index + 1025)}</p>
-                                </div>
-                                <div className="space-y-0.5 text-right">
-                                  <p className="text-[8px] font-mono text-slate-500 uppercase">Verification</p>
-                                  <p className="text-[10px] font-mono text-violet-400 font-bold">Active SHA-256</p>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            {cert.credentialUrl && cert.credentialUrl !== "#" && (
-                              <a
-                                href={cert.credentialUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-blue-500 hover:bg-blue-400 text-slate-950 font-mono font-extrabold text-[10px] uppercase transition-all"
-                              >
-                                <span>Retrieve Web Credential</span>
-                                <ExternalLink className="w-3 h-3 text-slate-950" />
-                              </a>
-                            )}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    <div className="flex items-center justify-between text-[11px] text-slate-450 border-t border-slate-900 pt-4 mt-6">
-                      <span className="text-slate-550 font-mono text-[9px]">
-                        {isExpanded ? "SECURE CONNECTION" : "SIMULATED ARCHIVE"}
-                      </span>
-                      <span className="text-blue-400 flex items-center gap-1 font-medium text-xs">
-                        <span>{isExpanded ? "Collapse Specs" : "Expand Report"}</span>
-                        <ChevronRight className={`w-3.5 h-3.5 transform transition-transform duration-300 ${isExpanded ? "rotate-90 text-emerald-400" : "group-hover:translate-x-0.5"}`} />
-                      </span>
-                    </div>
-                  </motion.div>
-                );
-              });
-            })()}
+                  <span className="text-[10px] font-mono text-slate-500">
+                    ID: {(index + 1025)}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </section>
 
@@ -2906,60 +2867,162 @@ CS Graduate specializing in Data Analytics, Business Intelligence, SaaS CRM oper
       <AnimatePresence>
         {selectedCertificate && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop blur overlay with outside click to close */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedCertificate(null)}
-              className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm"
+              className="absolute inset-0 bg-slate-950/90 backdrop-blur-md cursor-pointer"
             />
             
+            {/* Large Lightbox Modal Window */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-md bg-[#0e1726] border border-slate-850 rounded-2xl p-6 md:p-8 space-y-6 shadow-2xl z-25 text-center"
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ type: "spring", damping: 25, stiffness: 350 }}
+              className="relative w-full max-w-4xl bg-[#0a0f1d] border border-slate-850 rounded-2xl shadow-2xl z-20 flex flex-col overflow-hidden max-h-[92vh] max-w-[95vw] md:max-w-4xl"
             >
-              <button 
-                onClick={() => setSelectedCertificate(null)}
-                className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-500 hover:text-white bg-slate-900/60 border border-slate-850"
-              >
-                <X className="w-4 h-4" />
-              </button>
+              {/* Top Controls Header Bar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border-b border-slate-900 bg-slate-950/40 gap-4">
+                <div className="text-left">
+                  <span className="text-[9px] font-mono font-bold tracking-widest uppercase text-blue-400">Credential Verification</span>
+                  <h3 className="text-sm font-extrabold text-white leading-tight mt-0.5">
+                    {selectedCertificate.title}
+                  </h3>
+                  <p className="text-[11px] text-slate-400 font-mono">
+                    Issued by {selectedCertificate.issuer}
+                  </p>
+                </div>
 
-              <div className="space-y-4 pt-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-violet-600 flex items-center justify-center text-white text-2xl mx-auto shadow-xl">
-                  <Award className="w-8 h-8" />
+                <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap justify-end">
+                  {/* Zoom Controls */}
+                  <div className="flex items-center rounded-xl bg-slate-900 border border-slate-800 p-1 gap-1">
+                    <button
+                      onClick={() => setZoomScale(prev => Math.max(prev - 0.25, 0.75))}
+                      title="Zoom Out"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                    >
+                      <ZoomOut className="w-3.5 h-3.5" />
+                    </button>
+                    <span className="text-[10px] font-mono text-slate-300 font-bold px-1 select-none min-w-[3.5rem] text-center">
+                      {Math.round(zoomScale * 100)}%
+                    </span>
+                    <button
+                      onClick={() => setZoomScale(prev => Math.min(prev + 0.25, 2.5))}
+                      title="Zoom In"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                    >
+                      <ZoomIn className="w-3.5 h-3.5" />
+                    </button>
+                    {zoomScale !== 1 && (
+                      <button
+                        onClick={() => setZoomScale(1)}
+                        title="Reset Zoom"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer border-l border-slate-800 pl-2"
+                      >
+                        <RotateCcw className="w-3 h-3" />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Action Buttons */}
+                  {selectedCertificate.image && (
+                    <a
+                      href={selectedCertificate.image}
+                      download={selectedCertificate.image.split("/").pop()}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-1.5 py-2 px-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-white font-semibold transition-colors cursor-pointer shadow-md"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span className="hidden xs:inline">Download</span>
+                    </a>
+                  )}
+
+                  <button
+                    onClick={() => setSelectedCertificate(null)}
+                    className="p-2 rounded-xl text-slate-400 hover:text-white bg-slate-905 border border-slate-850 transition-colors cursor-pointer"
+                    title="Close Modal"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-                
-                <h3 className="text-xl font-extrabold text-white font-display">
-                  Validation Log
-                </h3>
-                
-                <div className="p-4 rounded-xl bg-[#0b1120] border border-slate-900 space-y-2 text-xs">
-                  <p className="text-slate-400 font-mono">Credential Name:</p>
-                  <p className="text-blue-400 font-bold font-sans">{selectedCertificate.title}</p>
-                  
-                  <div className="h-[1px] bg-slate-900 my-2" />
-                  
-                  <p className="text-slate-400 font-mono">Issuer Institute:</p>
-                  <p className="text-slate-200 font-semibold font-sans">{selectedCertificate.issuer}</p>
-                </div>
-                
-                <p className="text-[11px] text-slate-550 italic leading-relaxed">
-                  "This virtual simulation credentials profile represents verified diagnostic and analytical competencies completed across academic program sandboxes."
-                </p>
               </div>
 
-              <div className="flex justify-center pt-4">
-                <button
-                  onClick={() => setSelectedCertificate(null)}
-                  className="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs text-white font-semibold border border-slate-800"
-                >
-                  Close validation
-                </button>
+              {/* Viewport Content Area */}
+              <div className="flex-1 overflow-auto p-6 flex items-center justify-center bg-slate-950/60 min-h-[50vh] max-h-[70vh] cursor-grab active:cursor-grabbing">
+                <div className="transition-all duration-200 flex items-center justify-center">
+                  {!imageError && selectedCertificate.image ? (
+                    <motion.img
+                      src={selectedCertificate.image}
+                      alt={selectedCertificate.title}
+                      onError={() => setImageError(true)}
+                      style={{ scale: zoomScale }}
+                      onClick={() => setZoomScale(prev => prev === 1 ? 1.5 : 1)}
+                      className="max-h-[60vh] max-w-full rounded-lg shadow-2xl object-contain cursor-zoom-in transition-shadow duration-300 hover:shadow-blue-500/5 select-none"
+                    />
+                  ) : (
+                    /* Elegant fallback representation */
+                    <motion.div
+                      style={{ scale: zoomScale }}
+                      className="w-full max-w-2xl aspect-[1.414/1] bg-gradient-to-br from-[#111c30] to-[#040814] border-4 border-double border-amber-500/30 rounded-xl p-8 md:p-12 relative flex flex-col justify-between shadow-2xl overflow-hidden font-sans select-none"
+                    >
+                      {/* Decorative elements */}
+                      <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl focus:pointer-events-none" />
+                      <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl focus:pointer-events-none" />
+                      
+                      {/* Corner Borders */}
+                      <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-amber-500/40" />
+                      <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-amber-500/40" />
+                      <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-amber-500/40" />
+                      <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-amber-500/40" />
+
+                      <div className="text-center space-y-3">
+                        <span className="text-[10px] tracking-widest text-amber-500 font-mono font-bold uppercase">Official Simulated Accreditation</span>
+                        <h4 className="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 font-display leading-tight">
+                          {selectedCertificate.title}
+                        </h4>
+                        <div className="w-20 h-[1.5px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mx-auto" />
+                      </div>
+
+                      <div className="text-center space-y-2 my-2">
+                        <p className="text-xs text-slate-400">This certifies that</p>
+                        <p className="text-lg md:text-xl font-bold text-white font-display">Kaushal Singh Chamyal</p>
+                        <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
+                          has successfully demonstrated checked proficiency and completed virtual simulation sandbox requirements for
+                          <span className="text-blue-400 font-medium"> {selectedCertificate.title}</span> as administered by
+                          <span className="text-blue-400 font-semibold"> {selectedCertificate.issuer}</span>.
+                        </p>
+                      </div>
+
+                      <div className="flex items-center justify-between border-t border-slate-900/60 pt-6 mt-2">
+                        <div className="text-left space-y-0.5">
+                          <p className="text-[8px] font-mono text-slate-500 uppercase tracking-wider">Verification Hash</p>
+                          <p className="text-[10px] font-mono text-amber-500/80 font-bold">SHA256: 8f39...c4b2</p>
+                        </div>
+                        
+                        {/* Seal */}
+                        <div className="w-12 h-12 rounded-full border-2 border-dashed border-amber-500/30 flex items-center justify-center p-1 bg-amber-500/5">
+                          <Award className="w-7 h-7 text-amber-500" />
+                        </div>
+
+                        <div className="text-right space-y-0.5">
+                          <p className="text-[8px] font-mono text-slate-500 uppercase tracking-wider">Dated Issued</p>
+                          <p className="text-[10px] font-mono text-slate-350 font-bold">{selectedCertificate.year || "2024"}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </div>
 
+              {/* Bottom Footer Information Bar */}
+              <div className="p-3 bg-slate-950/60 border-t border-slate-900 flex justify-between items-center text-[10px] text-slate-500 font-mono px-6">
+                <span>VERIFICATION KEY: KC-CERT-MATCH</span>
+                <span className="hidden sm:inline">SHA-256 DIGITAL ENVELOPE</span>
+              </div>
             </motion.div>
           </div>
         )}
