@@ -1423,13 +1423,13 @@ WORK HISTORY
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-                className="group p-6 rounded-2xl bg-gradient-to-br from-[#0e1726]/30 to-[#0e1726]/10 backdrop-blur-lg border border-slate-900/60 hover:border-blue-500/40 hover:bg-[#0f172a]/20 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 relative flex flex-col justify-between h-full"
+                className="group p-6 rounded-2xl bg-[#0e1726]/30 dark:bg-gradient-to-br dark:from-[#0e1726]/30 dark:to-[#0e1726]/10 backdrop-blur-lg border border-slate-900/60 hover:border-blue-500/40 hover:bg-[#0f172a]/20 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 relative flex flex-col justify-between h-full"
               >
                 <div className="space-y-4">
                   {/* Top Header Row of Card */}
                   <div className="flex items-center justify-between">
-                    <div className="w-9 h-9 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 border border-violet-500/20">
-                      <Award className="w-5 h-5 text-violet-400" />
+                    <div className="w-9 h-9 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-600 dark:text-violet-400 border border-violet-500/20">
+                      <Award className="w-5 h-5 text-violet-500 dark:text-violet-400" />
                     </div>
                     {cert.year && (
                       <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] bg-slate-900/60 border border-slate-800 text-slate-400 font-bold">
@@ -1440,10 +1440,10 @@ WORK HISTORY
 
                   {/* Header block with Title & Issuer */}
                   <div className="space-y-1">
-                    <h3 className="font-extrabold text-base text-white leading-snug group-hover:text-blue-400 transition-colors duration-200">
+                    <h3 className="font-extrabold text-base text-white leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
                       {cert.title}
                     </h3>
-                    <p className="text-xs text-blue-400 font-mono font-medium">
+                    <p className="text-xs text-blue-600 dark:text-blue-400 font-mono font-medium">
                       {cert.issuer}
                     </p>
                   </div>
@@ -1463,13 +1463,13 @@ WORK HISTORY
                       e.stopPropagation();
                       setSelectedCertificate(cert);
                     }}
-                    className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-slate-950 font-sans font-extrabold text-xs transition-colors cursor-pointer shadow-lg shadow-blue-500/10"
+                    className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400 text-white dark:text-slate-950 font-sans font-extrabold text-xs transition-colors cursor-pointer shadow-lg shadow-blue-500/10 animate-transition"
                   >
-                    <Eye className="w-3.5 h-3.5 text-slate-950" />
+                    <Eye className="w-3.5 h-3.5 text-white dark:text-slate-950" />
                     <span>View Certificate</span>
                   </button>
 
-                  <span className="text-[10px] font-mono text-slate-500">
+                  <span className="text-[10px] font-mono text-slate-505">
                     ID: {(index + 1025)}
                   </span>
                 </div>
@@ -2882,13 +2882,13 @@ CS Graduate specializing in Data Analytics, Business Intelligence, SaaS CRM oper
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ type: "spring", damping: 25, stiffness: 350 }}
-              className="relative w-full max-w-4xl bg-[#0a0f1d] border border-slate-850 rounded-2xl shadow-2xl z-20 flex flex-col overflow-hidden max-h-[92vh] max-w-[95vw] md:max-w-4xl"
+              className="relative w-full max-w-4xl bg-slate-900 border border-slate-850 rounded-2xl shadow-2xl z-20 flex flex-col overflow-hidden max-h-[92vh] max-w-[95vw] md:max-w-4xl"
             >
               {/* Top Controls Header Bar */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border-b border-slate-900 bg-slate-950/40 gap-4">
                 <div className="text-left">
-                  <span className="text-[9px] font-mono font-bold tracking-widest uppercase text-blue-400">Credential Verification</span>
-                  <h3 className="text-sm font-extrabold text-white leading-tight mt-0.5">
+                  <span className="text-[9px] font-mono font-bold tracking-widest uppercase text-blue-500 dark:text-blue-400">Credential Verification</span>
+                  <h3 className="text-sm font-extrabold text-white mt-0.5 leading-tight">
                     {selectedCertificate.title}
                   </h3>
                   <p className="text-[11px] text-slate-400 font-mono">
@@ -2967,50 +2967,54 @@ CS Graduate specializing in Data Analytics, Business Intelligence, SaaS CRM oper
                     /* Elegant fallback representation */
                     <motion.div
                       style={{ scale: zoomScale }}
-                      className="w-full max-w-2xl aspect-[1.414/1] bg-gradient-to-br from-[#111c30] to-[#040814] border-4 border-double border-amber-500/30 rounded-xl p-8 md:p-12 relative flex flex-col justify-between shadow-2xl overflow-hidden font-sans select-none"
+                      className={`w-full max-w-2xl aspect-[1.414/1] ${
+                        theme === 'light'
+                          ? 'bg-gradient-to-br from-amber-50/90 via-orange-50/20 to-amber-50/60 border-4 border-double border-amber-600/35 shadow-xl text-slate-850'
+                          : 'bg-gradient-to-br from-[#111c30] to-[#040814] border-4 border-double border-amber-500/30 shadow-2xl text-white'
+                      } rounded-xl p-8 md:p-12 relative flex flex-col justify-between overflow-hidden font-sans select-none`}
                     >
                       {/* Decorative elements */}
                       <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl focus:pointer-events-none" />
                       <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl focus:pointer-events-none" />
                       
                       {/* Corner Borders */}
-                      <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-amber-500/40" />
-                      <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-amber-500/40" />
-                      <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-amber-500/40" />
-                      <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-amber-500/40" />
+                      <div className={`absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 ${theme === 'light' ? 'border-amber-600/50' : 'border-amber-500/40'}`} />
+                      <div className={`absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 ${theme === 'light' ? 'border-amber-600/50' : 'border-amber-500/40'}`} />
+                      <div className={`absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 ${theme === 'light' ? 'border-amber-600/50' : 'border-amber-500/40'}`} />
+                      <div className={`absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 ${theme === 'light' ? 'border-amber-600/50' : 'border-amber-500/40'}`} />
 
                       <div className="text-center space-y-3">
-                        <span className="text-[10px] tracking-widest text-amber-500 font-mono font-bold uppercase">Official Simulated Accreditation</span>
-                        <h4 className="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 font-display leading-tight">
+                        <span className={`text-[10px] tracking-widest ${theme === 'light' ? 'text-amber-700' : 'text-amber-500'} font-mono font-bold uppercase`}>Official Simulated Accreditation</span>
+                        <h4 className={`text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${theme === 'light' ? 'from-amber-800 via-amber-950 to-amber-900' : 'from-amber-200 via-yellow-100 to-amber-200'} font-display leading-tight`}>
                           {selectedCertificate.title}
                         </h4>
-                        <div className="w-20 h-[1.5px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mx-auto" />
+                        <div className={`w-20 h-[1.5px] bg-gradient-to-r from-transparent ${theme === 'light' ? 'via-amber-600/40' : 'via-amber-500/40'} to-transparent mx-auto`} />
                       </div>
 
                       <div className="text-center space-y-2 my-2">
-                        <p className="text-xs text-slate-400">This certifies that</p>
-                        <p className="text-lg md:text-xl font-bold text-white font-display">Kaushal Singh Chamyal</p>
-                        <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
+                        <p className={`text-xs ${theme === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>This certifies that</p>
+                        <p className={`text-lg md:text-xl font-bold font-display ${theme === 'light' ? 'text-slate-900' : 'text-white'}`}>Kaushal Singh Chamyal</p>
+                        <p className={`text-xs max-w-md mx-auto leading-relaxed ${theme === 'light' ? 'text-slate-700' : 'text-slate-450'}`}>
                           has successfully demonstrated checked proficiency and completed virtual simulation sandbox requirements for
-                          <span className="text-blue-400 font-medium"> {selectedCertificate.title}</span> as administered by
-                          <span className="text-blue-400 font-semibold"> {selectedCertificate.issuer}</span>.
+                          <span className={`font-semibold ${theme === 'light' ? 'text-blue-700' : 'text-blue-400'}`}> {selectedCertificate.title}</span> as administered by
+                          <span className={`font-bold ${theme === 'light' ? 'text-blue-850' : 'text-blue-400'}`}> {selectedCertificate.issuer}</span>.
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-between border-t border-slate-900/60 pt-6 mt-2">
+                      <div className={`flex items-center justify-between border-t ${theme === 'light' ? 'border-slate-350' : 'border-slate-900/60'} pt-6 mt-2`}>
                         <div className="text-left space-y-0.5">
                           <p className="text-[8px] font-mono text-slate-500 uppercase tracking-wider">Verification Hash</p>
-                          <p className="text-[10px] font-mono text-amber-500/80 font-bold">SHA256: 8f39...c4b2</p>
+                          <p className={`text-[10px] font-mono font-bold ${theme === 'light' ? 'text-amber-700' : 'text-amber-500/80'}`}>SHA256: 8f39...c4b2</p>
                         </div>
                         
                         {/* Seal */}
-                        <div className="w-12 h-12 rounded-full border-2 border-dashed border-amber-500/30 flex items-center justify-center p-1 bg-amber-500/5">
-                          <Award className="w-7 h-7 text-amber-500" />
+                        <div className={`w-12 h-12 rounded-full border-2 border-dashed ${theme === 'light' ? 'border-amber-600/40 bg-amber-600/5' : 'border-amber-500/30 bg-amber-500/5'} flex items-center justify-center p-1`}>
+                          <Award className={`w-7 h-7 ${theme === 'light' ? 'text-amber-700' : 'text-amber-500'}`} />
                         </div>
 
                         <div className="text-right space-y-0.5">
                           <p className="text-[8px] font-mono text-slate-500 uppercase tracking-wider">Dated Issued</p>
-                          <p className="text-[10px] font-mono text-slate-350 font-bold">{selectedCertificate.year || "2024"}</p>
+                          <p className={`text-[10px] font-mono font-bold ${theme === 'light' ? 'text-slate-800' : 'text-slate-350'}`}>{selectedCertificate.year || "2024"}</p>
                         </div>
                       </div>
                     </motion.div>
